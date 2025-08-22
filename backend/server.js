@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import productRoutes from './routes/productRoutes.js'; 
 
 dotenv.config(); // Load environment variables from .env file: dotenv es un paquete que carga las variables de entorno desde un archivo .env a process.env
 
@@ -14,10 +15,7 @@ app.use(cors()); // Enable CORS: CORS es un mecanismo que permite que los recurs
 app.use(helmet()); // Protect HTTP headers: Helmet es un middleware que ayuda a proteger la app
 app.use(morgan("dev")); // Log HTTP requests: Morgan es un middleware que ayuda a registrar las peticiones HTTP
 
-app.get("/", (req, res) => {
-  console.log(res.getHeaders());
-  res.send("Hello from the test route");
-});
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
